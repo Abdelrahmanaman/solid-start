@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "${PORT}:${PORT}"        # Map host port to container port
+    volumes:
+      - ./db:/app/db             # Mount local 'db' directory to container's '/app/db'
+    env_file:
+      - .env                     # Load environment variables from .env file
