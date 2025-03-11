@@ -1,6 +1,6 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
-export const user = sqliteTable("users", {
+export const user = sqliteTable("user", {
 	id: text("id").primaryKey(),
 	name: text("name").notNull(),
 	email: text("email").notNull().unique(),
@@ -10,7 +10,7 @@ export const user = sqliteTable("users", {
 	updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 });
 
-export const session = sqliteTable("sessions", {
+export const session = sqliteTable("session", {
 	id: text("id").primaryKey(),
 	expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
 	token: text("token").notNull().unique(),
@@ -23,7 +23,7 @@ export const session = sqliteTable("sessions", {
 		.references(() => user.id, { onDelete: "cascade" }),
 });
 
-export const account = sqliteTable("accounts", {
+export const account = sqliteTable("account", {
 	id: text("id").primaryKey(),
 	accountId: text("account_id").notNull(),
 	providerId: text("provider_id").notNull(),
@@ -45,7 +45,7 @@ export const account = sqliteTable("accounts", {
 	updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 });
 
-export const verification = sqliteTable("verifications", {
+export const verification = sqliteTable("verification", {
 	id: text("id").primaryKey(),
 	identifier: text("identifier").notNull(),
 	value: text("value").notNull(),

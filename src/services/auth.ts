@@ -5,9 +5,8 @@ import {
 	useQueryClient,
 } from "@tanstack/solid-query";
 import { useRouter } from "@tanstack/solid-router";
-import auth from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { getRequestEvent } from "solid-js/web";
-
 // Invalidate auth queries
 const useInvalidateAuth = (destination?: string) => {
 	const router = useRouter();
@@ -27,15 +26,21 @@ export const getUser = async () => {
 	const event = getRequestEvent();
 
 	if (!event) throw new Error("No request found");
-	const result = await auth.api.getSession({ headers: event.request.headers });
 
+	const result = await auth.api.getSession({ headers: event.request.headers });
 	return result?.user ?? null;
 };
 
 export const getUserQuery = () => {
 	return queryOptions({
 		queryKey: ["user"],
-		queryFn: getUser,
+		queryFn: async () => {
+			const users = await getUser();
+			console.log(users);
+			return {
+				users,
+			};
+		},
 		staleTime: 5 * 60 * 1000, // 5 minutes before data is stale
 		gcTime: 30 * 60 * 1000, // 30 minutes before garbage collectionn
 	});

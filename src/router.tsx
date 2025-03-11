@@ -22,17 +22,17 @@ export function createRouter(user: User | null = null) {
 			user,
 		},
 		defaultPreload: "intent",
-		defaultPreloadStaleTime: 5000,
+		defaultPreloadStaleTime: 0,
 		defaultErrorComponent: (err) => <div>{err.error.stack}</div>,
 		defaultNotFoundComponent: NotFoundComponent,
 		scrollRestoration: true,
 		defaultViewTransition: true,
 	});
 
-	return router;
+	return { router, queryClient };
 }
 
-export const router = createRouter();
+export const { router, queryClient } = createRouter();
 // Type safety for router context
 declare module "@tanstack/solid-router" {
 	interface Register {
