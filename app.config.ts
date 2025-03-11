@@ -6,7 +6,11 @@ import viteTsConfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
 	vite: {
 		plugins: [
-			TanStackRouterVite({ target: "solid" }),
+			TanStackRouterVite({
+				target: "solid",
+				routeFileIgnorePattern: "api/*",
+			}),
+
 			tailwindcss(),
 			viteTsConfigPaths({
 				projects: ["./tsconfig.json"],

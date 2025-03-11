@@ -3,9 +3,6 @@ import { routeTree } from "./routeTree.gen";
 import { QueryClient } from "@tanstack/solid-query";
 import type { User } from "better-auth";
 
-// Optional: Define a custom error component
-
-// Optional: Define a custom not-found component
 const NotFoundComponent = () => <div>404 - Not Found</div>;
 
 export function createRouter(user: User | null = null) {
